@@ -13,25 +13,34 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "tbl_image")
+@Table(name = "tbl_user")
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Image extends BaseInfo {
+public class User extends BaseInfo {
 
-    public enum FileType {
-        Manga, Cover, Icon, Others
+    public enum UserStatus {
+        Active, Inactive, Freeze, Lock
     };
 
     @Column
-    private String fileName;
+    private String username;
+
+    @Column
+    private String password;
+
+    @Column
+    private String name;
+
+    @Column
+    private String email;
+
+    @Column
+    private String mobile;
 
     @Enumerated(EnumType.STRING)
-    private FileType fileType;
+    private UserStatus status;
 
     @Column
-    private String mimeType;
-
-    @Column
-    private byte[] content;
+    private int loginFailedCount;
 
 }

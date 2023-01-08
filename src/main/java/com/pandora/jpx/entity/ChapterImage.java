@@ -1,5 +1,7 @@
 package com.pandora.jpx.entity;
 
+import com.pandora.core.entity.BaseInfo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_chapterImage")
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class ChapterImage extends BasicInfo {
+public class ChapterImage extends BaseInfo {
 
     @Column
     private Integer mangaId;
@@ -41,4 +43,5 @@ public class ChapterImage extends BasicInfo {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "imageId", insertable = false, updatable = false)
     private Image image;
+
 }

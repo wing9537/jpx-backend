@@ -3,6 +3,8 @@ package com.pandora.jpx.entity;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.pandora.core.entity.BaseInfo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_manga")
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Manga extends BasicInfo {
+public class Manga extends BaseInfo {
 
     @Column
     private String name;
@@ -48,4 +50,5 @@ public class Manga extends BasicInfo {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "manga")
     private List<Chapter> chapterList;
+
 }

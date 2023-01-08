@@ -2,6 +2,8 @@ package com.pandora.jpx.entity;
 
 import java.util.List;
 
+import com.pandora.core.entity.BaseInfo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_chapter")
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Chapter extends BasicInfo {
+public class Chapter extends BaseInfo {
 
     @Column
     private Integer mangaId;
@@ -40,4 +42,5 @@ public class Chapter extends BasicInfo {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tbl_chapterImage", joinColumns = @JoinColumn(name = "chapterId"), inverseJoinColumns = @JoinColumn(name = "imageId"))
     private List<Image> imageList;
+
 }

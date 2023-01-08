@@ -1,4 +1,4 @@
-package com.pandora.jpx.entity;
+package com.pandora.core.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -14,10 +14,10 @@ import lombok.Data;
 
 @Data
 @MappedSuperclass
-public abstract class BasicInfo implements Serializable {
-    
+public abstract class BaseInfo implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column
@@ -37,12 +37,15 @@ public abstract class BasicInfo implements Serializable {
 
     @PrePersist
     protected void prePersist() {
-        if (this.createTime == null) createTime = new Timestamp(0);
-        if (this.modifyTime == null) modifyTime = new Timestamp(0);
+        if (this.createTime == null)
+            createTime = new Timestamp(0);
+        if (this.modifyTime == null)
+            modifyTime = new Timestamp(0);
     }
 
     @PreUpdate
     protected void preUpdate() {
         this.modifyTime = new Timestamp(0);
     }
+
 }
