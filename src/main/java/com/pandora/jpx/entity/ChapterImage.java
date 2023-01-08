@@ -31,14 +31,14 @@ public class ChapterImage extends BasicInfo {
     private int seq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mangaId")
+    @JoinColumn(name = "mangaId", insertable = false, updatable = false)
     private Manga manga;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chapterId")
+    @JoinColumn(name = "chapterId", insertable = false, updatable = false)
     private Chapter chapter;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "imageId")
+    @JoinColumn(name = "imageId", insertable = false, updatable = false)
     private Image image;
 }

@@ -34,7 +34,7 @@ public class Chapter extends BasicInfo {
     private String desc;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "mangaId")
+    @JoinColumn(name = "mangaId", insertable = false, updatable = false)
     private Manga manga;
 
     @OneToMany(fetch = FetchType.LAZY)
