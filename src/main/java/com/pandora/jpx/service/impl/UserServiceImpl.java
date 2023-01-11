@@ -21,6 +21,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     public List<User> search(String username, String email, String mobile, String status) {
         // TODO Auto-generated method stub
         return null;

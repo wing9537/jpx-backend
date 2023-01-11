@@ -6,10 +6,10 @@ import com.pandora.jpx.entity.Chapter;
 
 public interface ChapterService {
 
-    Chapter findById(Integer id);
-    
-    List<Chapter> search(Integer mangaId, float episode, String name);
-    
-    Chapter save(Chapter chapter);
+    public Chapter findById(Integer id);
+
+    public List<Chapter> search(Integer mangaId, float episode, String name);
+
+    public Chapter save(Chapter chapter);
 
 }

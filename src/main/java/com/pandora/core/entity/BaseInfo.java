@@ -3,6 +3,8 @@ package com.pandora.core.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,35 +19,43 @@ import lombok.Data;
 public abstract class BaseInfo implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Integer id;
 
     @Column
+    @JsonIgnore
     private String deleted;
 
     @Column
+    @JsonIgnore
     private Integer createUser;
 
     @Column
+    @JsonIgnore
     private Timestamp createTime;
 
     @Column
+    @JsonIgnore
     private Integer modifyUser;
 
     @Column
+    @JsonIgnore
     private Timestamp modifyTime;
 
     @PrePersist
     protected void prePersist() {
-        if (this.createTime == null)
-            createTime = new Timestamp(0);
-        if (this.modifyTime == null)
-            modifyTime = new Timestamp(0);
+        createUser = 0; // TODO: get session user
+        modifyUser = 0; // TODO: get session user
+        createTime = new Timestamp(System.currentTimeMillis());
+        modifyTime = new Timestamp(System.currentTimeMillis());
+        deleted = "N";
     }
 
     @PreUpdate
     protected void preUpdate() {
-        this.modifyTime = new Timestamp(0);
+        modifyUser = 0; // TODO: get session user
+        modifyTime = new Timestamp(System.currentTimeMillis());
     }
 
 }

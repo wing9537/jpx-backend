@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JpxApplication {
 
 	public static void main(String[] args) {
-		System.out.println("App Started.");
 		SpringApplication.run(JpxApplication.class, args);
 	}
 

@@ -5,11 +5,11 @@ import java.util.List;
 import com.pandora.jpx.entity.ChapterImage;
 
 public interface ChapterImageService {
-    
-    ChapterImage findById(Integer id);
-    
-    List<ChapterImage> findByChapterId(Integer chapterId);
-    
-    ChapterImage save(ChapterImage chapterImage);
+
+    public ChapterImage findById(Integer id);
+
+    public List<ChapterImage> findByChapterId(Integer chapterId);
+
+    public ChapterImage save(ChapterImage chapterImage);
 
 }

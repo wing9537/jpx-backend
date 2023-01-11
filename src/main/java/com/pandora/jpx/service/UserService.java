@@ -6,10 +6,12 @@ import com.pandora.jpx.entity.User;
 
 public interface UserService {
 
-    User findById(Integer id);
+    public User findById(Integer id);
 
-    List<User> search(String username, String email, String mobile, String status);
+    public User findByUsername(String username);
 
-    User save(User manga);
+    public List<User> search(String username, String email, String mobile, String status);
+
+    public User save(User manga);
 
 }

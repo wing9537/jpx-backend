@@ -6,10 +6,10 @@ import com.pandora.jpx.entity.Image;
 
 public interface ImageService {
 
-    Image findById(Integer id);
-    
-    List<Image> search(String name, String type);
-    
-    Image save(Image image);
-    
+    public Image findById(Integer id);
+
+    public List<Image> search(String name, String type);
+
+    public Image save(Image image);
+
 }
