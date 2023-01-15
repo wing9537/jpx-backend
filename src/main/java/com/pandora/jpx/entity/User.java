@@ -18,6 +18,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User extends BaseInfo {
 
+    public enum UserRole {
+        User, Admin
+    };
+
     public enum UserStatus {
         Active, Inactive, Freeze, Lock
     };
@@ -36,6 +40,9 @@ public class User extends BaseInfo {
 
     @Column
     private String mobile;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;

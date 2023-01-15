@@ -1,4 +1,4 @@
-package com.pandora.jpx.model;
+package com.pandora.jpx.form;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserDto {
+public class RegisterForm {
 
     @NotBlank
     @Length(min = 1, max = 20)

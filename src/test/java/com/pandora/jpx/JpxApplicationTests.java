@@ -16,7 +16,7 @@ class JpxApplicationTests {
 	private PasswordHandler passwordHandler;
 
 	@Test
-	void testArgon2() {
+	public void testArgon2() {
 
 		String password = "Hello World";
 
@@ -26,9 +26,9 @@ class JpxApplicationTests {
 		System.out.println(hash);
 
 		// argon2 verify hash
-		// if (passwordHandler.matches("Hello World", hash)) {
-		// System.out.println("match");
-		// }
+		if (passwordHandler.matches("Hello World", hash)) {
+			System.out.println("match");
+		}
 		Instant end = Instant.now(); // end timer
 
 		System.out.println(String.format("Hashing took %s ms", ChronoUnit.MILLIS.between(start, end)));
