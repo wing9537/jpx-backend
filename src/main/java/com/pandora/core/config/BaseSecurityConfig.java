@@ -29,12 +29,13 @@ public class BaseSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.anonymous();
+        // http.anonymous();
         http.formLogin().disable();
         http.cors();
         http.csrf().disable();
         http.httpBasic().disable();
-        http.authorizeHttpRequests().anyRequest().permitAll();
+        http.authorizeHttpRequests().requestMatchers("/user/profile").authenticated()
+                .anyRequest().permitAll();
         http.exceptionHandling().authenticationEntryPoint(baseAuthEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(baseJwtFilter, UsernamePasswordAuthenticationFilter.class);

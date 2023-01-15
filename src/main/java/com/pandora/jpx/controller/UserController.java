@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pandora.core.controller.BaseController;
 import com.pandora.core.handler.BaseJwtHandler;
 import com.pandora.core.model.BaseResponse;
 import com.pandora.jpx.entity.User;
@@ -18,13 +19,14 @@ import com.pandora.jpx.entity.User.UserStatus;
 import com.pandora.jpx.form.LoginForm;
 import com.pandora.jpx.form.RegisterForm;
 import com.pandora.jpx.handler.PasswordHandler;
+import com.pandora.jpx.model.AuthorizedUser;
 import com.pandora.jpx.service.UserService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -40,9 +42,6 @@ public class UserController {
 
     @GetMapping("/testing")
     public BaseResponse testing() {
-        User user = userService.findByUsername("wing9537");
-        user.setPassword(passwordHandler.encode("12345678"));
-        userService.save(user);
         return BaseResponse.ok;
     }
 
@@ -69,10 +68,15 @@ public class UserController {
         if (user != null && passwordHandler.matches(form.getPassword(), user.getPassword())) {
             final UserDetails userDetails = userDetailsService.loadUserByUsername(form.getUsername());
             final String token = baseJwtHandler.generateToken(userDetails);
-            return BaseResponse.accept(token);
+            return BaseResponse.accept(new AuthorizedUser(user.getUsername(), token));
         } else {
             return BaseResponse.reject("user.incorrect");
         }
+    }
+
+    @PostMapping("/profile")
+    public BaseResponse profile() {
+        return BaseResponse.accept(getAuthority());
     }
 
 }
