@@ -11,13 +11,11 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "tbl_chapterImage")
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class ChapterImage extends BaseInfo {
 
     @Column

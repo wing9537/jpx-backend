@@ -9,13 +9,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "tbl_user")
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class User extends BaseInfo {
 
     public enum UserRole {

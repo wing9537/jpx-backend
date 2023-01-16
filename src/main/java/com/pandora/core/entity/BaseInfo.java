@@ -3,7 +3,10 @@ package com.pandora.core.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pandora.core.stateless.BaseAuthentication;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +32,7 @@ public abstract class BaseInfo implements Serializable {
 
     @Column
     @JsonIgnore
-    private Integer createUser;
+    private String createUser;
 
     @Column
     @JsonIgnore
@@ -37,7 +40,7 @@ public abstract class BaseInfo implements Serializable {
 
     @Column
     @JsonIgnore
-    private Integer modifyUser;
+    private String modifyUser;
 
     @Column
     @JsonIgnore
@@ -45,8 +48,8 @@ public abstract class BaseInfo implements Serializable {
 
     @PrePersist
     protected void prePersist() {
-        createUser = 0; // TODO: get session user
-        modifyUser = 0; // TODO: get session user
+        createUser = getOperatingUser();
+        modifyUser = getOperatingUser();
         createTime = new Timestamp(System.currentTimeMillis());
         modifyTime = new Timestamp(System.currentTimeMillis());
         deleted = "N";
@@ -54,8 +57,13 @@ public abstract class BaseInfo implements Serializable {
 
     @PreUpdate
     protected void preUpdate() {
-        modifyUser = 0; // TODO: get session user
+        modifyUser = getOperatingUser();
         modifyTime = new Timestamp(System.currentTimeMillis());
+    }
+
+    protected String getOperatingUser() {
+        BaseAuthentication authentication = (BaseAuthentication) SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null ? authentication.getUserName() : "SYSTEM";
     }
 
 }

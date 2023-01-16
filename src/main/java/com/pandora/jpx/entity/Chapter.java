@@ -14,13 +14,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "tbl_chapter")
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class Chapter extends BaseInfo {
 
     @Column

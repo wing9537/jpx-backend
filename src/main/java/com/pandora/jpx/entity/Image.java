@@ -9,13 +9,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "tbl_image")
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class Image extends BaseInfo {
 
     public enum FileType {
