@@ -29,7 +29,7 @@ public class BaseSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // http.anonymous();
+        http.anonymous().disable();
         http.formLogin().disable();
         http.cors();
         http.csrf().disable();

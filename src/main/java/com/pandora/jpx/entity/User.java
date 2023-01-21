@@ -31,7 +31,10 @@ public class User extends BaseInfo {
     private String password;
 
     @Column
-    private String name;
+    private String firstname;
+
+    @Column
+    private String lastname;
 
     @Column
     private String email;

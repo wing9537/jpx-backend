@@ -61,11 +61,12 @@ public class UserController extends BaseController {
         // save
         User user = new User();
         BeanUtils.copyProperties(form, user);
+        user.setPassword(passwordHandler.encode(form.getPassword()));
         user.setRole(UserRole.User);
         user.setStatus(UserStatus.Active);
         userService.save(user);
 
-        return BaseResponse.accept(user);
+        return BaseResponse.ok;
     }
 
     @PostMapping("/login")

@@ -23,12 +23,15 @@ public class RegisterForm {
     private String password;
 
     @NotBlank
-    private String name;
+    private String firstname;
+
+    @NotBlank
+    private String lastname;
 
     @Email
     private String email;
 
-    @Pattern(regexp = "^[3-9][0-9]{7}$")
+    @Pattern(regexp = "^(?:[3-9][0-9]{7}|)$")
     private String mobile;
 
 }
