@@ -1,5 +1,6 @@
 package com.pandora.jpx.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pandora.core.entity.BaseInfo;
 
 import jakarta.persistence.Column;
@@ -28,6 +29,7 @@ public class User extends BaseInfo {
     private String username;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column

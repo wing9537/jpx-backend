@@ -42,13 +42,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/testing")
     public BaseResponse testing() {
-        User user = userService.findById(getUserId());
-        if (user != null) {
-            user.setEmail("tommykwok@email.com");
-            user.setMobile("64369205");
-            user = userService.save(user);
-        }
-        return BaseResponse.accept(user);
+        return BaseResponse.accept("TESTING");
     }
 
     @PostMapping("/register")
@@ -83,7 +77,8 @@ public class UserController extends BaseController {
 
     @PostMapping("/profile")
     public BaseResponse profile() {
-        return BaseResponse.accept(getAuthority());
+        User user = userService.findById(getUserId());
+        return BaseResponse.accept(user);
     }
 
 }
