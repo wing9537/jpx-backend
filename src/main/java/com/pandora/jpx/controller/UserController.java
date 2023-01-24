@@ -42,7 +42,9 @@ public class UserController extends BaseController {
 
     @GetMapping("/testing")
     public BaseResponse testing() {
-        return BaseResponse.accept("TESTING");
+        // return BaseResponse.accept("TESTING");
+        User user = userService.findById(1);
+        return BaseResponse.accept(user);
     }
 
     @PostMapping("/register")

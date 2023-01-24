@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.pandora.core.handler.BaseJsonEncodeHandler;
 import com.pandora.core.stateless.BaseAuthentication;
 
 import jakarta.persistence.Column;
@@ -23,7 +25,7 @@ public abstract class BaseInfo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
+    @JsonSerialize(using = BaseJsonEncodeHandler.class)
     private Integer id;
 
     @Column
