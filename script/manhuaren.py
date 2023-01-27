@@ -1,7 +1,18 @@
-from bs4 import BeautifulSoup
-import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+# from webdriver_manager.chrome import ChromeDriverManager
 
-URL = "https://www.manhuaren.com/m1364451/"
-chapterRequest = requests.get(URL)
+options = Options()
+options.add_argument('--no-sandbox')
+options.add_argument('--headless')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument("--remote-debugging-port=9222")
 
-print(chapterRequest.content)
+try:
+  driver = webdriver.Chrome(executable_path="chromium.chromedriver", chrome_options=options)
+  driver.get("https://www.google.com")
+  print(driver.title)
+  driver.quit()
+except Exception as ex:
+  print(ex)
