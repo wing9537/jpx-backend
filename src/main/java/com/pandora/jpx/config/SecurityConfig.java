@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.pandora.core.properties.BaseProperties;
 
 @Configuration
-// @EnableWebSecurity
 public class SecurityConfig {
 
     @Autowired
@@ -26,11 +25,5 @@ public class SecurityConfig {
         encoderMap.put(encoderName, new Argon2PasswordEncoder(16, 32, 1, 1 << 16, 1));
         return new DelegatingPasswordEncoder(encoderName, encoderMap);
     }
-
-    // @Bean
-    // public WebSecurityCustomizer webSecurityCustomizer() {
-    //     return (web) -> web.ignoring().requestMatchers("/fragments", "/v2/api-docs", "/webjars/**",
-    //         "/configuration/ui", "/swagger-resources/**", "/configuration/security", "/swagger-ui/**");
-    // }
 
 }
