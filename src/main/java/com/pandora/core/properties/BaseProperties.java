@@ -12,4 +12,6 @@ public class BaseProperties {
 
     private String appName;
 
+    private String version;
+
 }
