@@ -3,6 +3,7 @@ package com.pandora.jpx.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pandora.jpx.entity.ChapterImage;
 import com.pandora.jpx.repository.ChapterImageRepository;
@@ -14,16 +15,19 @@ public class ChapterImageServiceImpl implements ChapterImageService {
     private ChapterImageRepository chapterImageRepository;
 
     @Override
+    @Transactional
     public ChapterImage findById(Integer id) {
         return chapterImageRepository.findById(id).get();
     }
 
     @Override
+    @Transactional
     public List<ChapterImage> findByChapterId(Integer chapterId) {
         return chapterImageRepository.findByChapterIdOrderBySeqAsc(chapterId);
     }
 
     @Override
+    @Transactional
     public ChapterImage save(ChapterImage chapterImage) {
         return chapterImageRepository.save(chapterImage);
     }

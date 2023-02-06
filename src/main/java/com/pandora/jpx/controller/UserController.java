@@ -23,7 +23,9 @@ import com.pandora.jpx.model.AuthorizedUser;
 import com.pandora.jpx.service.UserService;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
@@ -42,7 +44,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/testing")
     public BaseResponse testing() {
-        // return BaseResponse.accept("TESTING");
+        log.debug("Hello testing");
         User user = userService.findById(1);
         return BaseResponse.accept(user);
     }

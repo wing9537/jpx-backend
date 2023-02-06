@@ -11,9 +11,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
-@OpenAPIDefinition(
-    info = @Info(title = "JPX API", version = "${base.version}")
-)
+@OpenAPIDefinition(info = @Info(title = "JPX API", version = "${base.version}"))
 public class SpringDocConfig {
     
     @Bean

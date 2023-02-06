@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.pandora.core.handler.BaseAesHandler;
 import com.pandora.jpx.handler.PasswordHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootTest
 class JpxApplicationTests {
 
@@ -27,15 +30,15 @@ class JpxApplicationTests {
 		Instant start = Instant.now(); // start timer
 
 		String hash = passwordHandler.encode(password);
-		System.out.println(hash);
+		log.debug(hash);
 
 		// argon2 verify hash
 		if (passwordHandler.matches("Hello World", hash)) {
-			System.out.println("match");
+			log.debug("match");
 		}
 		Instant end = Instant.now(); // end timer
 
-		System.out.println(String.format("Hashing took %s ms", ChronoUnit.MILLIS.between(start, end)));
+		log.debug("Hashing took {} ms", ChronoUnit.MILLIS.between(start, end));
 	}
 
 	@Test
@@ -43,11 +46,10 @@ class JpxApplicationTests {
 		String plainText = "Some text for encryption, lalalala";
 
 		String encodeString = baseAesHandler.encrypt(plainText);
-		System.out.println("encodeString: " + encodeString);
+		log.debug("encodeString: {}", encodeString);
 
 		String decodeString = baseAesHandler.decrypt(encodeString);
-		System.out.println("decodeString: " + decodeString);
-
+		log.debug("decodeString: {}", decodeString);
 	}
 
 }

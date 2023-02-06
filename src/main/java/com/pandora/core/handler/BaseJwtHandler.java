@@ -21,7 +21,7 @@ import jakarta.annotation.PostConstruct;
 @Component
 public class BaseJwtHandler {
 
-    @Value("${jwt.expiry}")
+    @Value("${base.token.expiry}")
     private int expiryTime;
 
     private PublicKey publicKey;

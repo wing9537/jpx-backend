@@ -17,7 +17,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class BaseJwtFilter extends OncePerRequestFilter {
 
@@ -42,12 +44,12 @@ public class BaseJwtFilter extends OncePerRequestFilter {
             try {
                 username = baseJwtHandler.getUsernameFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
+                log.info("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
+                log.info("JWT Token has expired");
             }
         } else {
-            logger.warn("JWT Token does not begin with Bearer String");
+            log.warn("JWT Token does not begin with Bearer String");
         }
 
         // Once we get the token validate it.
@@ -63,7 +65,12 @@ public class BaseJwtFilter extends OncePerRequestFilter {
                 // we specify that the current user is authenticated.
                 // So it passes the Spring Security Configurations successfully.
                 SecurityContextHolder.getContext().setAuthentication(baseAuthentication);
+                log.debug("Authorized user: {}", userDetails);
+            } else {
+                log.debug("Unauthorized user: {}", userDetails);
             }
+        } else {
+            log.warn("Skip JWT authentication");
         }
         chain.doFilter(request, response);
     }
