@@ -13,8 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfig {
 
-    @Value("base.app-name")
-    String encoderName;
+    @Value("${base.app-name}")
+    private String encoderName;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
