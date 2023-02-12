@@ -8,8 +8,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class BaseJsonDecodeHandler extends StdDeserializer<Integer> {
-    
+
     @Autowired
     private BaseAesHandler baseAesHandler;
 
@@ -27,9 +30,9 @@ public class BaseJsonDecodeHandler extends StdDeserializer<Integer> {
             // assume decrypted string must be an integer.
             return Integer.parseInt(baseAesHandler.decrypt(parser.getText()));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Invalid decoding", e);
             return null;
         }
     }
-    
+
 }

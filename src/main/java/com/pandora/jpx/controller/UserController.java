@@ -4,7 +4,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +22,7 @@ import com.pandora.jpx.model.AuthorizedUser;
 import com.pandora.jpx.service.UserService;
 
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
@@ -41,13 +38,6 @@ public class UserController extends BaseController {
 
     @Autowired
     private BaseJwtHandler baseJwtHandler;
-
-    @GetMapping("/testing")
-    public BaseResponse testing() {
-        log.debug("Hello testing");
-        User user = userService.findById(1);
-        return BaseResponse.accept(user);
-    }
 
     @PostMapping("/register")
     public BaseResponse registration(@Valid @RequestBody RegisterForm form) {
