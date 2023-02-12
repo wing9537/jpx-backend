@@ -2,13 +2,17 @@ package com.pandora.jpx;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.pandora.core.handler.BaseAesHandler;
+import com.pandora.jpx.handler.MangaCrawler;
 import com.pandora.jpx.handler.PasswordHandler;
+import com.pandora.jpx.model.FileBucket;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +25,9 @@ class JpxApplicationTests {
 
 	@Autowired
 	private BaseAesHandler baseAesHandler;
+
+	@Autowired
+	private MangaCrawler mangaCrawler;
 
 	@Test
 	public void testArgon2() {
@@ -50,6 +57,12 @@ class JpxApplicationTests {
 
 		String decodeString = baseAesHandler.decrypt(encodeString);
 		log.debug("decodeString: {}", decodeString);
+	}
+
+	@Test
+	public void testMangaCrawler() {
+		List<FileBucket> files = mangaCrawler.process("manhuaren.py", "https://www.manhuaren.com/m1370692/");
+		log.debug("results:\n{}", files.stream().map(f -> f.getSource()).collect(Collectors.joining("\n")));
 	}
 
 }

@@ -30,6 +30,9 @@ public class ChapterImage extends BaseInfo {
     @Column
     private int seq;
 
+    @Column
+    private String source;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mangaId", insertable = false, updatable = false)
     private Manga manga;
