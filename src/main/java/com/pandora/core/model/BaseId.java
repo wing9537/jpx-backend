@@ -1,17 +1,16 @@
 package com.pandora.core.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class BaseId {
 
-    private Integer val;
+    private final Integer val;
 
-    private String original;
-
-    public BaseId(String text) {
-        this.val = Integer.valueOf(text);
-        this.original = text;
+    public static BaseId valueOf(String text) {
+        return new BaseId(Integer.valueOf(text));
     }
 
 }

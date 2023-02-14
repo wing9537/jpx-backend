@@ -20,7 +20,7 @@ public class BaseIdConverter implements Converter<String, BaseId> {
     public BaseId convert(String text) {
         try {
             if (BaseValidationUtil.isBase64(text)) {
-                return new BaseId(baseAesHandler.decrypt(text));
+                return BaseId.valueOf(baseAesHandler.decrypt(text));
             }
         } catch (Exception e) {
             log.error("Invalid decoding", e);
