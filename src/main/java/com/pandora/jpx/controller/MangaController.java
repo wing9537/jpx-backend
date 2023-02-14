@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pandora.core.controller.BaseController;
+import com.pandora.core.model.BaseId;
 import com.pandora.core.model.BaseResponse;
 import com.pandora.jpx.form.MangaForm;
 
@@ -27,17 +28,17 @@ public class MangaController extends BaseController {
     }
 
     @GetMapping("/{id}")
-    public BaseResponse readManga(@PathVariable String id) {
+    public BaseResponse readManga(@PathVariable BaseId id) {
         return BaseResponse.ok;
     }
 
     @PutMapping("/{id}")
-    public BaseResponse updateManga(@PathVariable String id, @Valid @RequestBody MangaForm form) {
+    public BaseResponse updateManga(@PathVariable BaseId id, @Valid @RequestBody MangaForm form) {
         return BaseResponse.ok;
     }
 
     @DeleteMapping("/{id}")
-    public BaseResponse deleteManga(@PathVariable String id) {
+    public BaseResponse deleteManga(@PathVariable BaseId id) {
         return BaseResponse.ok;
     }
 
@@ -47,17 +48,17 @@ public class MangaController extends BaseController {
     }
 
     @PatchMapping("/{id}/chapter/{ep}/fetch")
-    public BaseResponse fetchChapter(@PathVariable String id, @PathVariable float ep) {
+    public BaseResponse fetchChapter(@PathVariable BaseId id, @PathVariable float ep) {
         return BaseResponse.ok;
     }
 
     @GetMapping("/chapter/{id}")
-    public BaseResponse readChapter(@PathVariable String id) {
+    public BaseResponse readChapter(@PathVariable BaseId id) {
         return BaseResponse.ok;
     }
 
     @DeleteMapping("/chapter/{id}")
-    public BaseResponse deleteChapter(@PathVariable String id) {
+    public BaseResponse deleteChapter(@PathVariable BaseId id) {
         return BaseResponse.ok;
     }
 

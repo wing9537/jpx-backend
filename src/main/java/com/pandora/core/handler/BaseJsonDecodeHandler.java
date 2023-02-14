@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.pandora.core.utils.BaseValidationUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,11 +29,13 @@ public class BaseJsonDecodeHandler extends StdDeserializer<Integer> {
     public Integer deserialize(JsonParser parser, DeserializationContext context) throws IOException {
         try {
             // assume decrypted string must be an integer.
-            return Integer.parseInt(baseAesHandler.decrypt(parser.getText()));
+            if (BaseValidationUtil.isBase64(parser.getText())) {
+                return Integer.valueOf(baseAesHandler.decrypt(parser.getText()));
+            }
         } catch (Exception e) {
             log.error("Invalid decoding", e);
-            return null;
         }
+        return null;
     }
 
 }

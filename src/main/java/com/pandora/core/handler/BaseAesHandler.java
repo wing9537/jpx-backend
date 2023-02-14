@@ -15,7 +15,7 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 public class BaseAesHandler {
-    
+
     private final int AES_KEY_SIZE = 256;
 
     private final int GCM_IV_LENGTH = 12;
@@ -30,7 +30,7 @@ public class BaseAesHandler {
     public void init() throws Exception {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(AES_KEY_SIZE);
-       
+
         // Generate Key & IV
         secretKey = keyGenerator.generateKey();
         SecureRandom random = new SecureRandom();
@@ -42,19 +42,19 @@ public class BaseAesHandler {
 
         // Get Cipher Instance
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-        
+
         // Create SecretKeySpec
         SecretKeySpec keySpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
-        
+
         // Create GCMParameterSpec
         GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(GCM_TAG_LENGTH * 8, IV);
-        
+
         // Initialize Cipher for ENCRYPT_MODE
         cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmParameterSpec);
-        
+
         // Perform Encryption
         byte[] cipherText = cipher.doFinal(plaintext.getBytes());
-        
+
         return Base64.getEncoder().encodeToString(cipherText);
     }
 
@@ -62,19 +62,19 @@ public class BaseAesHandler {
 
         // Get Cipher Instance
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-        
+
         // Create SecretKeySpec
         SecretKeySpec keySpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
-        
+
         // Create GCMParameterSpec
         GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(GCM_TAG_LENGTH * 8, IV);
-        
+
         // Initialize Cipher for DECRYPT_MODE
         cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmParameterSpec);
-        
+
         // Perform Decryption
         byte[] decryptedText = cipher.doFinal(Base64.getDecoder().decode(cipherText));
-        
+
         return new String(decryptedText);
     }
 
