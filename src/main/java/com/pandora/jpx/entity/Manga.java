@@ -42,7 +42,7 @@ public class Manga extends BaseInfo {
     @Column
     private Timestamp lastUpdateTime;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coverPage", insertable = false, updatable = false)
     private Image coverImage;
 

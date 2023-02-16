@@ -41,7 +41,7 @@ public class ChapterImage extends BaseInfo {
     @JoinColumn(name = "chapterId", insertable = false, updatable = false)
     private Chapter chapter;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "imageId", insertable = false, updatable = false)
     private Image image;
 

@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsernameAndDeleted(username, "N");
     }
 
     @Override
@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User save(User user) {
         return userRepository.save(user);
     }

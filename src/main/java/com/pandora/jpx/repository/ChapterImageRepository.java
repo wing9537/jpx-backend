@@ -9,7 +9,7 @@ import com.pandora.jpx.entity.ChapterImage;
 
 @Repository
 public interface ChapterImageRepository extends JpaRepository<ChapterImage, Integer> {
-    
-    public List<ChapterImage> findByChapterIdOrderBySeqAsc(Integer chapterId);
+
+    public List<ChapterImage> findByChapterIdAndDeletedOrderBySeqAsc(Integer chapterId, String deleted);
 
 }

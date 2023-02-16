@@ -1,5 +1,7 @@
 package com.pandora.jpx.controller;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,7 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pandora.core.controller.BaseController;
 import com.pandora.core.model.BaseId;
 import com.pandora.core.model.BaseResponse;
+import com.pandora.jpx.entity.Chapter;
+import com.pandora.jpx.entity.Manga;
 import com.pandora.jpx.form.MangaForm;
+import com.pandora.jpx.service.ChapterService;
+import com.pandora.jpx.service.MangaService;
 
 import jakarta.validation.Valid;
 
@@ -22,23 +28,38 @@ import jakarta.validation.Valid;
 @RequestMapping("/manga")
 public class MangaController extends BaseController {
 
+    @Autowired
+    private MangaService mangaService;
+
+    @Autowired
+    private ChapterService chapterService;
+
     @PostMapping("/new")
     public BaseResponse createManga(@Valid @RequestBody MangaForm form) {
+        Manga manga = new Manga();
+        BeanUtils.copyProperties(form, manga);
+        mangaService.save(manga);
         return BaseResponse.ok;
     }
 
     @GetMapping("/{id}")
     public BaseResponse readManga(@PathVariable BaseId id) {
-        return BaseResponse.ok;
+        Manga manga = mangaService.findById(id.getVal());
+        return BaseResponse.accept(manga);
     }
 
     @PutMapping("/{id}")
     public BaseResponse updateManga(@PathVariable BaseId id, @Valid @RequestBody MangaForm form) {
+        Manga manga = mangaService.findById(id.getVal());
+        BeanUtils.copyProperties(form, manga);
         return BaseResponse.ok;
     }
 
     @DeleteMapping("/{id}")
     public BaseResponse deleteManga(@PathVariable BaseId id) {
+        Manga manga = mangaService.findById(id.getVal());
+        manga.setDeleted("Y");
+        mangaService.save(manga);
         return BaseResponse.ok;
     }
 
@@ -54,11 +75,15 @@ public class MangaController extends BaseController {
 
     @GetMapping("/chapter/{id}")
     public BaseResponse readChapter(@PathVariable BaseId id) {
-        return BaseResponse.ok;
+        Chapter chapter = chapterService.findById(id.getVal());
+        return BaseResponse.accept(chapter);
     }
 
     @DeleteMapping("/chapter/{id}")
     public BaseResponse deleteChapter(@PathVariable BaseId id) {
+        Chapter chapter = chapterService.findById(id.getVal());
+        chapter.setDeleted("Y");
+        chapterService.save(chapter);
         return BaseResponse.ok;
     }
 

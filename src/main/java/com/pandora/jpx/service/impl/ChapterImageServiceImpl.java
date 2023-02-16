@@ -23,7 +23,7 @@ public class ChapterImageServiceImpl implements ChapterImageService {
     @Override
     @Transactional
     public List<ChapterImage> findByChapterId(Integer chapterId) {
-        return chapterImageRepository.findByChapterIdOrderBySeqAsc(chapterId);
+        return chapterImageRepository.findByChapterIdAndDeletedOrderBySeqAsc(chapterId, "N");
     }
 
     @Override
@@ -31,5 +31,5 @@ public class ChapterImageServiceImpl implements ChapterImageService {
     public ChapterImage save(ChapterImage chapterImage) {
         return chapterImageRepository.save(chapterImage);
     }
-    
+
 }

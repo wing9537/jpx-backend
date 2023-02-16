@@ -4,7 +4,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +56,6 @@ public class UserController extends BaseController {
         user.setRole(UserRole.User);
         user.setStatus(UserStatus.Active);
         userService.save(user);
-
         return BaseResponse.ok;
     }
 
@@ -69,10 +71,20 @@ public class UserController extends BaseController {
         }
     }
 
-    @PostMapping("/profile")
-    public BaseResponse profile() {
+    @GetMapping("/profile")
+    public BaseResponse readProfile() {
         User user = userService.findById(getUserId());
         return BaseResponse.accept(user);
+    }
+
+    @PutMapping("/profile")
+    public BaseResponse updateProfile() {
+        return BaseResponse.ok; // TODO
+    }
+
+    @DeleteMapping("/profile")
+    public BaseResponse deleteProfile() {
+        return BaseResponse.ok;
     }
 
 }
