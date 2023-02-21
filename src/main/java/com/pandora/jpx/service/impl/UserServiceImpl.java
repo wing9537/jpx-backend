@@ -41,4 +41,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        userRepository.deleteById(id);
+    }
+
 }

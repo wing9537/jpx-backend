@@ -34,5 +34,11 @@ public class MangaServiceImpl implements MangaService {
     public Manga save(Manga manga) {
         return mangaRepository.save(manga);
     }
-    
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        mangaRepository.deleteById(id);
+    }
+
 }

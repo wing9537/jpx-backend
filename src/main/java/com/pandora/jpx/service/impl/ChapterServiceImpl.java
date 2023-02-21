@@ -24,9 +24,8 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     @Transactional
-    public List<Chapter> search(Integer mangaId, float episode, String name) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Chapter> findByMangaId(Integer mangaId) {
+        return chapterRepository.findByMangaIdAndDeletedOrderByEpisodeDesc(mangaId, "N");
     }
 
     @Override
@@ -34,5 +33,11 @@ public class ChapterServiceImpl implements ChapterService {
     public Chapter save(Chapter chapter) {
         return chapterRepository.save(chapter);
     }
-    
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        chapterRepository.deleteById(id);
+    }
+
 }

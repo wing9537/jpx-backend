@@ -8,8 +8,10 @@ public interface ChapterService {
 
     public Chapter findById(Integer id);
 
-    public List<Chapter> search(Integer mangaId, float episode, String name);
+    public List<Chapter> findByMangaId(Integer mangaId);
 
     public Chapter save(Chapter chapter);
+
+    public void deleteById(Integer id);
 
 }

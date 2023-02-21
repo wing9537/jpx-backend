@@ -1,0 +1,2 @@
+[ ] enable cors & csrf token
+[ ] add mysql trigger auto delete children if parent deleted

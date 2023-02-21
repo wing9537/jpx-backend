@@ -12,4 +12,6 @@ public interface MangaService {
 
     public Manga save(Manga manga);
 
+    public void deleteById(Integer id);
+
 }

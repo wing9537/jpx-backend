@@ -52,14 +52,13 @@ public class MangaController extends BaseController {
     public BaseResponse updateManga(@PathVariable BaseId id, @Valid @RequestBody MangaForm form) {
         Manga manga = mangaService.findById(id.getVal());
         BeanUtils.copyProperties(form, manga);
+        mangaService.save(manga);
         return BaseResponse.ok;
     }
 
     @DeleteMapping("/{id}")
     public BaseResponse deleteManga(@PathVariable BaseId id) {
-        Manga manga = mangaService.findById(id.getVal());
-        manga.setDeleted("Y");
-        mangaService.save(manga);
+        mangaService.deleteById(id.getVal());
         return BaseResponse.ok;
     }
 
@@ -81,9 +80,7 @@ public class MangaController extends BaseController {
 
     @DeleteMapping("/chapter/{id}")
     public BaseResponse deleteChapter(@PathVariable BaseId id) {
-        Chapter chapter = chapterService.findById(id.getVal());
-        chapter.setDeleted("Y");
-        chapterService.save(chapter);
+        chapterService.deleteById(id.getVal());
         return BaseResponse.ok;
     }
 

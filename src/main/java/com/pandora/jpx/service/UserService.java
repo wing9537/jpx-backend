@@ -14,4 +14,6 @@ public interface UserService {
 
     public User save(User manga);
 
+    public void deleteById(Integer id);
+
 }

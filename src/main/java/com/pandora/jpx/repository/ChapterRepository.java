@@ -1,11 +1,15 @@
 package com.pandora.jpx.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
+import com.pandora.core.repository.BaseRepository;
 import com.pandora.jpx.entity.Chapter;
 
 @Repository
-public interface ChapterRepository extends JpaRepository<Chapter, Integer> {
+public interface ChapterRepository extends BaseRepository<Chapter> {
+
+    List<Chapter> findByMangaIdAndDeletedOrderByEpisodeDesc(Integer mangaId, String deleted);
 
 }

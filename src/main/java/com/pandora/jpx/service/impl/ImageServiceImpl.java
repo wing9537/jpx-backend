@@ -1,7 +1,5 @@
 package com.pandora.jpx.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,15 +22,8 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     @Transactional
-    public List<Image> search(String name, String type) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    @Transactional
     public Image save(Image image) {
         return imageRepository.save(image);
     }
-    
+
 }
