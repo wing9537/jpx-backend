@@ -54,9 +54,13 @@ public class MangaController extends BaseController {
     @PutMapping("/{id}")
     public BaseResponse updateManga(@PathVariable BaseId id, @Valid @RequestBody MangaForm form) {
         Manga manga = mangaService.findById(id.getVal());
+        if (manga == null) {
+            return BaseResponse.reject("manga.not.exist");
+        }
         BeanUtils.copyProperties(form, manga);
         mangaService.save(manga);
         return BaseResponse.ok;
+        
     }
 
     @DeleteMapping("/{id}")
