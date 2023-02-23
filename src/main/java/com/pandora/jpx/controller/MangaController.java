@@ -1,5 +1,8 @@
 package com.pandora.jpx.controller;
 
+import java.util.List;
+
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pandora.core.controller.BaseController;
@@ -19,6 +21,7 @@ import com.pandora.core.model.BaseResponse;
 import com.pandora.jpx.entity.Chapter;
 import com.pandora.jpx.entity.Manga;
 import com.pandora.jpx.form.MangaForm;
+import com.pandora.jpx.form.MangaSearchForm;
 import com.pandora.jpx.service.ChapterService;
 import com.pandora.jpx.service.MangaService;
 
@@ -63,8 +66,9 @@ public class MangaController extends BaseController {
     }
 
     @GetMapping("/search")
-    public BaseResponse searchManga(@Valid @RequestParam MangaForm form) {
-        return BaseResponse.ok;
+    public BaseResponse searchManga(@ParameterObject MangaSearchForm form) {
+        List<Manga> mangaList = mangaService.search(form);
+        return BaseResponse.accept(mangaList);
     }
 
     @PatchMapping("/{id}/chapter/{ep}/fetch")

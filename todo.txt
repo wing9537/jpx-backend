@@ -1,0 +1,3 @@
+[ ] enable cors & csrf token
+[ ] add mysql trigger auto delete children if parent deleted
+[ ] log4j config file setup

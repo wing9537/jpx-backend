@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import com.pandora.core.handler.BaseSqlBuilder;
 import com.pandora.jpx.entity.Manga;
+import com.pandora.jpx.form.MangaSearchForm;
 import com.pandora.jpx.repository.MangaRepository;
 import com.pandora.jpx.service.MangaService;
 
@@ -24,9 +27,17 @@ public class MangaServiceImpl implements MangaService {
 
     @Override
     @Transactional
-    public List<Manga> search(String name, String author) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Manga> search(MangaSearchForm form) {
+        return mangaRepository.findAll((root, query, builder) -> {
+            BaseSqlBuilder<Manga> sqlBuilder = new BaseSqlBuilder<>(root, builder);
+            if (StringUtils.hasText(form.getName())) {
+                sqlBuilder.like("name", form.getName());
+            }
+            if (StringUtils.hasText(form.getAuthor())) {
+                sqlBuilder.like("author", form.getAuthor());
+            }
+            return sqlBuilder.build();
+        });
     }
 
     @Override
