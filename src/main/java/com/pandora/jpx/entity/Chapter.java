@@ -2,7 +2,10 @@ package com.pandora.jpx.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.pandora.core.entity.BaseInfo;
+import com.pandora.core.handler.BaseJsonEncodeHandler;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,6 +25,7 @@ import lombok.EqualsAndHashCode;
 public class Chapter extends BaseInfo {
 
     @Column
+    @JsonSerialize(using = BaseJsonEncodeHandler.class)
     private Integer mangaId;
 
     @Column
@@ -33,6 +37,7 @@ public class Chapter extends BaseInfo {
     @Column
     private String desc;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mangaId", insertable = false, updatable = false)
     private Manga manga;

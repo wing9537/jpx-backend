@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pandora.jpx.entity.Chapter;
+import com.pandora.jpx.model.ChapterDto;
 import com.pandora.jpx.repository.ChapterRepository;
 import com.pandora.jpx.service.ChapterService;
 
@@ -24,7 +25,7 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     @Transactional
-    public List<Chapter> findByMangaId(Integer mangaId) {
+    public List<ChapterDto> findByMangaId(Integer mangaId) {
         return chapterRepository.findByMangaIdAndDeletedOrderByEpisodeDesc(mangaId, "N");
     }
 

@@ -3,6 +3,7 @@ package com.pandora.jpx.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,7 @@ import com.pandora.jpx.entity.Image.FileType;
 import com.pandora.jpx.form.MangaForm;
 import com.pandora.jpx.form.MangaSearchForm;
 import com.pandora.jpx.handler.MangaCrawler;
+import com.pandora.jpx.model.ChapterDto;
 import com.pandora.jpx.model.FileBucket;
 import com.pandora.jpx.service.ChapterImageService;
 import com.pandora.jpx.service.ChapterService;
@@ -63,7 +65,8 @@ public class MangaController extends BaseController {
     @GetMapping("/{id}")
     public BaseResponse readManga(@PathVariable BaseId id) {
         Manga manga = mangaService.findById(id.getVal());
-        return BaseResponse.accept(manga);
+        List<ChapterDto> chapterList = chapterService.findByMangaId(id.getVal());
+        return BaseResponse.accept(Map.of("manga", manga, "chapters", chapterList));
     }
 
     @PutMapping("/{id}")

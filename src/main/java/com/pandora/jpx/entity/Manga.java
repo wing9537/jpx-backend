@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.pandora.core.entity.BaseInfo;
+import com.pandora.core.handler.BaseJsonEncodeHandler;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +37,7 @@ public class Manga extends BaseInfo {
     private String link;
 
     @Column
+    @JsonSerialize(using = BaseJsonEncodeHandler.class)
     private Integer coverPage;
 
     @Column
