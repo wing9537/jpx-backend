@@ -29,7 +29,7 @@ public class BaseJsonDecodeHandler extends StdDeserializer<Integer> {
     public Integer deserialize(JsonParser parser, DeserializationContext context) throws IOException {
         try {
             // assume decrypted string must be an integer.
-            if (BaseValidationUtil.isBase64(parser.getText())) {
+            if (BaseValidationUtil.isBase64Url(parser.getText())) {
                 return Integer.valueOf(baseAesHandler.decrypt(parser.getText()));
             }
         } catch (Exception e) {

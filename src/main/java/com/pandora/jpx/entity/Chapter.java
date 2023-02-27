@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pandora.core.entity.BaseInfo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,7 +25,7 @@ public class Chapter extends BaseInfo {
     private Integer mangaId;
 
     @Column
-    private float episode;
+    private int episode;
 
     @Column
     private String name;
@@ -36,7 +37,7 @@ public class Chapter extends BaseInfo {
     @JoinColumn(name = "mangaId", insertable = false, updatable = false)
     private Manga manga;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "chapter")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "chapter", cascade = CascadeType.ALL)
     private List<ChapterImage> imageList;
 
 }

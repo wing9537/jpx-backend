@@ -12,4 +12,6 @@ public interface ChapterImageService {
 
     public ChapterImage save(ChapterImage chapterImage);
 
+    public void deleteByChapterId(Integer chapterId);
+
 }

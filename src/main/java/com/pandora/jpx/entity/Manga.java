@@ -3,6 +3,7 @@ package com.pandora.jpx.entity;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pandora.core.entity.BaseInfo;
 
 import jakarta.persistence.Column;
@@ -37,15 +38,17 @@ public class Manga extends BaseInfo {
     private Integer coverPage;
 
     @Column
-    private float latestChapter;
+    private int latestChapter;
 
     @Column
     private Timestamp lastUpdateTime;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coverPage", insertable = false, updatable = false)
     private Image coverImage;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "manga")
     private List<Chapter> chapterList;
 

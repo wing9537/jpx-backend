@@ -30,6 +30,12 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     @Transactional
+    public Chapter findByMangaIdAndEpisode(Integer mangaId, Integer episode) {
+        return chapterRepository.findByMangaIdAndEpisodeAndDeleted(mangaId, episode, "N");
+    }
+
+    @Override
+    @Transactional
     public Chapter save(Chapter chapter) {
         return chapterRepository.save(chapter);
     }

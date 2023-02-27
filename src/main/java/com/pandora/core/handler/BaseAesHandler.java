@@ -55,7 +55,7 @@ public class BaseAesHandler {
         // Perform Encryption
         byte[] cipherText = cipher.doFinal(plaintext.getBytes());
 
-        return Base64.getEncoder().encodeToString(cipherText);
+        return Base64.getUrlEncoder().encodeToString(cipherText);
     }
 
     public String decrypt(String cipherText) throws Exception {
@@ -73,7 +73,7 @@ public class BaseAesHandler {
         cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmParameterSpec);
 
         // Perform Decryption
-        byte[] decryptedText = cipher.doFinal(Base64.getDecoder().decode(cipherText));
+        byte[] decryptedText = cipher.doFinal(Base64.getUrlDecoder().decode(cipherText));
 
         return new String(decryptedText);
     }

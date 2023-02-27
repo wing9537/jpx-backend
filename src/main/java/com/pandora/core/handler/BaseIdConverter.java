@@ -19,7 +19,7 @@ public class BaseIdConverter implements Converter<String, BaseId> {
     @Override
     public BaseId convert(String text) {
         try {
-            if (BaseValidationUtil.isBase64(text)) {
+            if (BaseValidationUtil.isBase64Url(text)) {
                 return BaseId.valueOf(baseAesHandler.decrypt(text));
             }
         } catch (Exception e) {

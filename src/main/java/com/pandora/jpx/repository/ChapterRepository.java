@@ -12,4 +12,6 @@ public interface ChapterRepository extends BaseRepository<Chapter> {
 
     List<Chapter> findByMangaIdAndDeletedOrderByEpisodeDesc(Integer mangaId, String deleted);
 
+    Chapter findByMangaIdAndEpisodeAndDeleted(Integer mangaId, Integer episode, String deleted);
+
 }

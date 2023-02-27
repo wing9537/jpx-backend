@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class MangaCrawler {
 
-    public List<FileBucket> process(String script, String... argv) {
+    private final String script = "manhuaren.py";
+
+    public List<FileBucket> process(String... argv) {
         Process process = null;
         ProcessBuilder processBuilder = new ProcessBuilder("python", resolveScriptPath(script));
         processBuilder.command().addAll(Arrays.asList(argv)); // add arguments
@@ -29,7 +32,7 @@ public class MangaCrawler {
         List<FileBucket> resultList = null;
 
         try {
-            log.info("Starting script: {}", script);
+            log.info("Starting script: {} {}", script, argv);
             process = processBuilder.start();
             int exitCode = process.waitFor();
             if (exitCode == 0) {
@@ -49,13 +52,18 @@ public class MangaCrawler {
     }
 
     private List<FileBucket> readProcessOutput(InputStream inputStream) {
-        return new BufferedReader(new InputStreamReader(inputStream))
-                .lines().map(url -> {
-                    FileBucket file = new FileBucket();
-                    file.setSource(url);
-                    file.setContent(getImageFromUrl(url));
-                    return file;
-                }).toList();
+        String[] results = new BufferedReader(new InputStreamReader(inputStream))
+                .lines().toArray(String[]::new);
+
+        List<FileBucket> fileList = new ArrayList<>();
+        for (int i = 1, len = results.length; i < len; i++) {
+            FileBucket file = new FileBucket();
+            file.setName(results[0]);
+            file.setSource(results[i]);
+            file.setContent(getImageFromUrl(results[i]));
+            fileList.add(file);
+        }
+        return fileList;
     }
 
     private String readErrorMsg(InputStream inputStream) {

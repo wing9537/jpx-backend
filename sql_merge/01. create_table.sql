@@ -5,7 +5,7 @@ CREATE TABLE `tbl_image` (
   `fileName` varchar(100) NOT NULL,
   `fileType` enum('Manga','Cover','Icon','Others') NOT NULL,
   `mimeType` varchar(100) NOT NULL,
-  `content` blob NOT NULL,
+  `content` mediumblob NOT NULL
   `deleted` varchar(1) NOT NULL DEFAULT 'N',
   `createUser` varchar(20) NOT NULL DEFAULT 'SYSTEM',
   `createTime` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -47,7 +47,7 @@ CREATE TABLE `tbl_manga` (
   `desc` varchar(500) DEFAULT NULL,
   `link` text DEFAULT NULL,
   `coverPage` int(11) DEFAULT NULL,
-  `latestChapter` float NOT NULL DEFAULT 0,
+  `latestChapter` int(11) NOT NULL DEFAULT 0,
   `lastUpdateTime` timestamp NULL DEFAULT NULL,
   `deleted` varchar(1) NOT NULL DEFAULT 'N',
   `createUser` varchar(20) NOT NULL DEFAULT 'SYSTEM',
@@ -65,7 +65,7 @@ CREATE TABLE `tbl_manga` (
 CREATE TABLE `tbl_chapter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mangaId` int(11) NOT NULL,
-  `episode` float NOT NULL,
+  `episode` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `desc` varchar(500) DEFAULT NULL,
   `deleted` varchar(1) NOT NULL DEFAULT 'N',
@@ -82,7 +82,7 @@ CREATE TABLE `tbl_chapter` (
 -- pandora.tbl_chapterImage definition
 
 CREATE TABLE `tbl_chapterImage` (
-  `id` binary(16) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `mangaId` int(11) NOT NULL,
   `chapterId` int(11) NOT NULL,
   `imageId` int(11) NOT NULL,

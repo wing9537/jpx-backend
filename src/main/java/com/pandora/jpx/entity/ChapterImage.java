@@ -2,6 +2,7 @@ package com.pandora.jpx.entity;
 
 import com.pandora.core.entity.BaseInfo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,13 +19,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class ChapterImage extends BaseInfo {
 
-    @Column
+    @Column(insertable = false, updatable = false)
     private Integer mangaId;
 
-    @Column
+    @Column(insertable = false, updatable = false)
     private Integer chapterId;
 
-    @Column
+    @Column(insertable = false, updatable = false)
     private Integer imageId;
 
     @Column
@@ -34,15 +35,15 @@ public class ChapterImage extends BaseInfo {
     private String source;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mangaId", insertable = false, updatable = false)
+    @JoinColumn(name = "mangaId", nullable = false)
     private Manga manga;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chapterId", insertable = false, updatable = false)
+    @JoinColumn(name = "chapterId", nullable = false)
     private Chapter chapter;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "imageId", insertable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "imageId", nullable = false)
     private Image image;
 
 }

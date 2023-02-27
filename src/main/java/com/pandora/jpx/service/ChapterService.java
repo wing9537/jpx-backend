@@ -10,6 +10,8 @@ public interface ChapterService {
 
     public List<Chapter> findByMangaId(Integer mangaId);
 
+    public Chapter findByMangaIdAndEpisode(Integer mangaId, Integer episode);
+
     public Chapter save(Chapter chapter);
 
     public void deleteById(Integer id);
