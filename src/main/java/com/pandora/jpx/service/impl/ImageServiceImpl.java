@@ -26,4 +26,10 @@ public class ImageServiceImpl implements ImageService {
         return imageRepository.save(image);
     }
 
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        imageRepository.deleteById(id);
+    }
+
 }

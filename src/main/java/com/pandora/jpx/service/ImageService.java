@@ -8,4 +8,6 @@ public interface ImageService {
 
     public Image save(Image image);
 
+    public void deleteById(Integer id);
+
 }

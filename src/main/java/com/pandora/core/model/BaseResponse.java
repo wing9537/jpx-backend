@@ -27,6 +27,8 @@ public class BaseResponse extends ResponseEntity<Object> {
 
     static public final BaseResponse notFound = new BaseResponse(HttpStatus.NOT_FOUND);
 
+    static public final BaseResponse noContent = new BaseResponse(HttpStatus.NO_CONTENT);
+
     static public final BaseResponse unauthorized = new BaseResponse(HttpStatus.UNAUTHORIZED);
 
     public static BaseResponse accept(Object body) {

@@ -6,6 +6,9 @@ BEGIN
     UPDATE tbl_chapter SET deleted = 'Y' where mangaId = NEW.id;
     UPDATE tbl_image SET deleted = 'Y' where id = NEW.coverPage;
   END IF;
+  IF (OLD.coverPage <> NEW.coverPage) THEN
+    UPDATE tbl_image SET deleted = 'Y' where id = OLD.coverPage;
+  END IF;
 END;
 
 -- pandora.tbl_chapter triggers
