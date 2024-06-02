@@ -1,6 +1,6 @@
 -- pandora.tbl_image definition
 
-CREATE TABLE `tbl_image` (
+CREATE TABLE IF NOT EXISTS `tbl_image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fileName` varchar(100) NOT NULL,
   `fileType` enum('Manga','Cover','Icon','Others') NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `tbl_image` (
 
 -- pandora.tbl_user definition
 
-CREATE TABLE `tbl_user` (
+CREATE TABLE IF NOT EXISTS `tbl_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(120) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `tbl_user` (
 
 -- pandora.tbl_manga definition
 
-CREATE TABLE `tbl_manga` (
+CREATE TABLE IF NOT EXISTS `tbl_manga` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `author` varchar(100) DEFAULT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `tbl_manga` (
 
 -- pandora.tbl_chapter definition
 
-CREATE TABLE `tbl_chapter` (
+CREATE TABLE IF NOT EXISTS `tbl_chapter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mangaId` int(11) NOT NULL,
   `episode` int(11) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `tbl_chapter` (
 
 -- pandora.tbl_chapterImage definition
 
-CREATE TABLE `tbl_chapterImage` (
+CREATE TABLE IF NOT EXISTS `tbl_chapterImage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mangaId` int(11) NOT NULL,
   `chapterId` int(11) NOT NULL,
