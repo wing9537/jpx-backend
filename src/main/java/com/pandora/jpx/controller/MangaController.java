@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,17 +41,23 @@ import jakarta.validation.Valid;
 @RequestMapping("/manga")
 public class MangaController extends BaseController {
 
-    @Autowired
     private MangaService mangaService;
 
-    @Autowired
     private ChapterService chapterService;
 
-    @Autowired
     private ChapterImageService chapterImageService;
 
-    @Autowired
     private MangaCrawler mangaCrawler;
+
+    public MangaController(
+        MangaService mangaService, ChapterService chapterService,
+        ChapterImageService chapterImageService, MangaCrawler mangaCrawler
+    ) {
+        this.mangaService = mangaService;
+        this.chapterService = chapterService;
+        this.chapterImageService = chapterImageService;
+        this.mangaCrawler = mangaCrawler;
+    }
 
     @PostMapping("/new")
     public BaseResponse createManga(@Valid @RequestBody MangaForm form) {

@@ -12,7 +12,7 @@ public interface UserService {
 
     public List<User> search(String username, String email, String mobile, String status);
 
-    public User save(User manga);
+    public User save(User user);
 
     public void deleteById(Integer id);
 

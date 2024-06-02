@@ -2,7 +2,6 @@ package com.pandora.jpx.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -16,8 +15,11 @@ import com.pandora.jpx.service.MangaService;
 @Service
 public class MangaServiceImpl implements MangaService {
 
-    @Autowired
     private MangaRepository mangaRepository;
+
+    public MangaServiceImpl(MangaRepository mangaRepository) {
+        this.mangaRepository = mangaRepository;
+    }
 
     @Override
     @Transactional

@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Image extends BaseInfo {
 
-    public enum FileType {
+    public static enum FileType {
         Manga, Cover, Icon, Others
     };
 

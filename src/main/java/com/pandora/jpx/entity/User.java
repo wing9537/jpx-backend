@@ -17,11 +17,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseInfo {
 
-    public enum UserRole {
+    public static enum UserRole {
         User, Admin
     };
 
-    public enum UserStatus {
+    public static enum UserStatus {
         Active, Inactive, Freeze, Lock
     };
 

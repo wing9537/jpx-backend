@@ -11,7 +11,7 @@
 
 	<groupId>com.pandora</groupId>
 	<artifactId>jpx</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>jpx</name>
 	<description>Side project for Spring Boot</description>
 

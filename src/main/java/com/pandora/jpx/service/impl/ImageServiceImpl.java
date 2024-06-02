@@ -1,6 +1,5 @@
 package com.pandora.jpx.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +10,11 @@ import com.pandora.jpx.service.ImageService;
 @Service
 public class ImageServiceImpl implements ImageService {
 
-    @Autowired
     private ImageRepository imageRepository;
+
+    public ImageServiceImpl(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
+    }
 
     @Override
     @Transactional

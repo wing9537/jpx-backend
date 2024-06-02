@@ -1,7 +1,6 @@
 package com.pandora.jpx.controller;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,17 +29,23 @@ import jakarta.validation.Valid;
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
-    @Autowired
-    private PasswordHandler passwordHandler;
+    private final PasswordHandler passwordHandler;
 
-    @Autowired
-    private BaseJwtHandler baseJwtHandler;
+    private final BaseJwtHandler baseJwtHandler;
+
+    public UserController(
+        UserService userService, UserDetailsService userDetailsService,
+        PasswordHandler passwordHandler, BaseJwtHandler baseJwtHandler
+    ) {
+        this.userService = userService;
+        this.userDetailsService = userDetailsService;
+        this.passwordHandler = passwordHandler;
+        this.baseJwtHandler = baseJwtHandler;
+    }
 
     @PostMapping("/register")
     public BaseResponse registration(@Valid @RequestBody RegisterForm form) {

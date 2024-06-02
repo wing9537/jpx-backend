@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,15 +25,17 @@ import com.pandora.jpx.service.ImageService;
 @RequestMapping("/image")
 public class ImageController extends BaseController {
 
-    @Autowired
     private ImageService imageService;
 
-    private static final List<String> ALLOWED_IMAGE_CONTENT_TYPES = Arrays.asList(
-            "image/jpeg", "image/png", "image/gif", "image/bmp");
+    private static final List<String> ALLOWED_CONTENT_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif", "image/bmp");
+
+    public ImageController(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
     @PostMapping(path = "/{type}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public BaseResponse createImage(@PathVariable FileType type, @RequestParam MultipartFile file) throws IOException {
-        if (file.isEmpty() || !ALLOWED_IMAGE_CONTENT_TYPES.contains(file.getContentType())) {
+        if (file.isEmpty() || !ALLOWED_CONTENT_TYPES.contains(file.getContentType())) {
             return BaseResponse.badRequest;
         }
         // save

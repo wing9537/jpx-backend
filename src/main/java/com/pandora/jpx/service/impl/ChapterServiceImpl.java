@@ -2,7 +2,6 @@ package com.pandora.jpx.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +13,11 @@ import com.pandora.jpx.service.ChapterService;
 @Service
 public class ChapterServiceImpl implements ChapterService {
 
-    @Autowired
     private ChapterRepository chapterRepository;
+
+    public ChapterServiceImpl(ChapterRepository chapterRepository) {
+        this.chapterRepository = chapterRepository;
+    }
 
     @Override
     @Transactional
