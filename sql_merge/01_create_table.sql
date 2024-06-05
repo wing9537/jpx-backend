@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `tbl_image` (
   `fileName` varchar(100) NOT NULL,
   `fileType` enum('Manga','Cover','Icon','Others') NOT NULL,
   `mimeType` varchar(100) NOT NULL,
-  `content` mediumblob NOT NULL
+  `content` mediumblob NOT NULL,
   `deleted` varchar(1) NOT NULL DEFAULT 'N',
   `createUser` varchar(20) NOT NULL DEFAULT 'SYSTEM',
   `createTime` timestamp NOT NULL DEFAULT current_timestamp(),
