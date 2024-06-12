@@ -25,6 +25,6 @@ public class MangaForm {
     private Integer coverPage;
 
     @Min(1)
-    private float latestChapter;
+    private int latestChapter;
 
 }

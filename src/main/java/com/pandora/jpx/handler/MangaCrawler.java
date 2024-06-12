@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.pandora.jpx.model.FileBucket;
@@ -22,11 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class MangaCrawler {
 
+    @Value("${base.python-home}")
+    private String PYTHON_HOME;
+
     private final String script = "manhuaren.py";
 
     public List<FileBucket> process(String... argv) {
         Process process = null;
-        ProcessBuilder processBuilder = new ProcessBuilder("python", resolveScriptPath(script));
+        ProcessBuilder processBuilder = new ProcessBuilder(PYTHON_HOME, resolveScriptPath(script));
         processBuilder.command().addAll(Arrays.asList(argv)); // add arguments
         processBuilder.redirectErrorStream(true);
         List<FileBucket> resultList = null;
