@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  jpx-backend:
+    image: jpx-backend:dev
+    container_name: jpx-backend
+    build:
+      context: .
+      target: development
+    ports:
+      - "8080:8080"
+    depends_on:
+      - jpx-database
+      - jpx-selenium
+  jpx-database:
+    image: mariadb:latest
+    container_name: jpx-database
+    ports:
+      - "3307:3306"
+    volumes:
+      - type: volume
+        source: jpx-database-data
+        target: /var/lib/mysql
+      - type: bind
+        source: ./jpx-database/sql
+        target: /docker-entrypoint-initdb.d
+        read_only: true
+    environment:
+      MYSQL_DATABASE: pandora
+      MYSQL_ROOT_PASSWORD: g3--@({Wh_M.Mca@[sjX.YaACQw%G90S
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+  jpx-selenium:
+    image: selenium/standalone-firefox
+    container_name: jpx-selenium
+volumes:
+  jpx-database-data:
