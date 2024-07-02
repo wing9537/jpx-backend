@@ -15,7 +15,7 @@ import com.pandora.jpx.service.MangaService;
 @Service
 public class MangaServiceImpl implements MangaService {
 
-    private MangaRepository mangaRepository;
+    private final MangaRepository mangaRepository;
 
     public MangaServiceImpl(MangaRepository mangaRepository) {
         this.mangaRepository = mangaRepository;

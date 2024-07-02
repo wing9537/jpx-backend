@@ -12,7 +12,7 @@ import com.pandora.jpx.service.ChapterImageService;
 @Service
 public class ChapterImageServiceImpl implements ChapterImageService {
 
-    private ChapterImageRepository chapterImageRepository;
+    private final ChapterImageRepository chapterImageRepository;
 
     public ChapterImageServiceImpl(ChapterImageRepository chapterImageRepository) {
         this.chapterImageRepository = chapterImageRepository;

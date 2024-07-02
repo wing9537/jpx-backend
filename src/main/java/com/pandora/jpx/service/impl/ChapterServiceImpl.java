@@ -13,7 +13,7 @@ import com.pandora.jpx.service.ChapterService;
 @Service
 public class ChapterServiceImpl implements ChapterService {
 
-    private ChapterRepository chapterRepository;
+    private final ChapterRepository chapterRepository;
 
     public ChapterServiceImpl(ChapterRepository chapterRepository) {
         this.chapterRepository = chapterRepository;

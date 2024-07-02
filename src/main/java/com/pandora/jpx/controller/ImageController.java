@@ -25,7 +25,7 @@ import com.pandora.jpx.service.ImageService;
 @RequestMapping("/image")
 public class ImageController extends BaseController {
 
-    private ImageService imageService;
+    private final ImageService imageService;
 
     private static final List<String> ALLOWED_CONTENT_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif", "image/bmp");
 

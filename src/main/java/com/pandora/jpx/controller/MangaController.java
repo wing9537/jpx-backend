@@ -41,13 +41,13 @@ import jakarta.validation.Valid;
 @RequestMapping("/manga")
 public class MangaController extends BaseController {
 
-    private MangaService mangaService;
+    private final MangaService mangaService;
 
-    private ChapterService chapterService;
+    private final ChapterService chapterService;
 
-    private ChapterImageService chapterImageService;
+    private final ChapterImageService chapterImageService;
 
-    private MangaCrawler mangaCrawler;
+    private final MangaCrawler mangaCrawler;
 
     public MangaController(
         MangaService mangaService, ChapterService chapterService,

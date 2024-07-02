@@ -10,8 +10,10 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.pandora.core.utils.BaseValidationUtil;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class BaseJsonDecodeHandler extends StdDeserializer<Integer> {
 
     @Autowired

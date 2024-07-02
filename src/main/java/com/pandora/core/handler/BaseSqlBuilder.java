@@ -20,12 +20,11 @@ public class BaseSqlBuilder<T> {
     enum Wildcard {
         START, END, CONTAIN;
         public String wrap(String text) {
-            switch(this) {
-                case START: return "%" + text;
-                case END: return text + "%";
-                case CONTAIN: return "%" + text + "%";
-                default: return text;
-            }
+            return switch (this) {
+                case START -> "%" + text;
+                case END -> text + "%";
+                case CONTAIN -> "%" + text + "%";
+            };
         }
     };
 
