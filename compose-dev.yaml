@@ -1,4 +1,5 @@
 version: "3.7"
+name: jpx
 services:
   jpx-backend:
     image: jpx-backend:dev
@@ -11,6 +12,11 @@ services:
     depends_on:
       - jpx-database
       - jpx-selenium
+    environment:
+      DB_HOST: jpx-database
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      PYTHON_HOME: python3
   jpx-database:
     image: mariadb:latest
     container_name: jpx-database
@@ -21,7 +27,7 @@ services:
         source: jpx-database-data
         target: /var/lib/mysql
       - type: bind
-        source: ./jpx-database/sql
+        source: ./sql/create
         target: /docker-entrypoint-initdb.d
         read_only: true
     environment:
@@ -34,3 +40,4 @@ services:
     container_name: jpx-selenium
 volumes:
   jpx-database-data:
+    name: volume-jpx-database
