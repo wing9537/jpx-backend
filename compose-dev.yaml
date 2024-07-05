@@ -4,6 +4,7 @@ services:
   jpx-backend:
     image: jpx-backend:dev
     container_name: jpx-backend
+    restart: always
     build:
       context: .
       target: development
@@ -12,6 +13,10 @@ services:
     depends_on:
       - jpx-database
       - jpx-selenium
+    volumes:
+      - type: bind
+        source: .
+        target: /opt/workspace
     environment:
       DB_HOST: jpx-database
       DB_USERNAME: admin

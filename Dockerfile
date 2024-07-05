@@ -7,12 +7,11 @@ COPY . .
 
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
-RUN pip install -r script/requirements.txt
 RUN ./mvnw dependency:go-offline
 RUN ./mvnw install -D skipTests
 
 FROM builder AS development
-
+RUN pip install -r script/requirements.txt
 CMD ./mvnw spring-boot:run
 
 FROM builder AS production
