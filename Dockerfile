@@ -2,7 +2,6 @@
 
 FROM eclipse-temurin:17-jdk AS builder
 WORKDIR /opt/workspace
-USER root:root
 COPY . .
 
 RUN apt-get update
